@@ -3,7 +3,11 @@ const todoSchema = new mongoose.Schema({
     name: { type: String, required: true },
     done: { type: Boolean, required: false }
 },
-    { timestamps: true }
+    {
+        timestamps: true,
+        collection: 'todos'  // Explicitly set collection name to match MongoDB Atlas
+
+    }
 );
 const Todo = mongoose.model('Todo', todoSchema);
-module.exports = Todo;
+export default Todo;

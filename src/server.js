@@ -1,13 +1,44 @@
-import express from 'express'
-// const express = require('express');
-// const mongoose = require('mongoose')
-import mongoose from 'mongoose'
-import Blog from './model';
+import express from 'express';
+import mongoose from 'mongoose';
+import Todo from './model.js';
+
 const app = express();
+
+// Add middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const dbURL = 'mongodb+srv://useraccess:7878788788@cluster0.r9zdppo.mongodb.net/todolist?retryWrites=true&w=majority';
-mongoose.connect(dbURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then((result) => app.listen(3000)
-).catch((err) => console.log(err))
-//listen for requests
+
+mongoose.connect(dbURL)
+    .then(() => {
+        console.log('Connected to MongoDB');
+        app.listen(3000, () => {
+            console.log('Server running on port 3000');
+        });
+    })
+    .catch((err) => console.log('MongoDB connection error:', err));
+
+// Add a GET route for testing
+app.get('/addtodo', (req, res) => {
+    res.send('GET /addtodo endpoint is working');
+});
+
+// Add a POST route for actually creating todos
+app.post('/addtodo', (req, res) => {
+    console.log('Attempting to create new todo');
+    // const todo = new Todo({
+    //     name: 'call your mom',
+    //     done: true
+    // });
+
+    todo.save()
+        .then((result) => {
+            console.log('Todo saved successfully:', result);
+            res.json(result);
+        })
+        .catch((err) => {
+            console.error('Error saving todo:', err);
+            res.status(500).json({ error: 'Error saving todo', details: err.message });
+        });
+});
