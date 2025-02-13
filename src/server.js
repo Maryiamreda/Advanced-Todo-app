@@ -60,16 +60,16 @@ app.post('/add-todo', (req, res) => {
 });
 
 //delete todo
-app.delete('/delete-todo', async (req, res) => {
-    const { id } = req.body;
+app.delete('/delete-todo/:id', async (req, res) => {
+    const { id } = req.params;
 
     if (!id) {
-        return res.status(400).json({ success: false, message: 'Todo field is required' });
+        return res.status(400).json({ success: false, message: 'id required' });
     }
     try {
         const deletedTodo = await Todo.findByIdAndDelete(id);
         if (!deletedTodo) {
-            return res.status(404).json({ success: false, message: 'Todo not found' });
+            return res.status(404).json({ success: false, message: 'id not found' });
         }
         res.json({
             success: true,
