@@ -48,7 +48,6 @@ app.post('/add-todo', (req, res) => {
         name: todo,
         done: false
     });
-
     addtodo.save()
         .then((result) => {
             console.log('Todo saved successfully:', result);
@@ -59,7 +58,8 @@ app.post('/add-todo', (req, res) => {
             res.status(500).json({ error: 'Error saving todo', details: err.message });
         });
 });
-//delete
+
+//delete todo
 app.delete('/delete-todo', async (req, res) => {
     const { id } = req.body;
 
