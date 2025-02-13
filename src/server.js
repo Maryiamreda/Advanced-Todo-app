@@ -80,3 +80,31 @@ app.delete('/delete-todo/:id', async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 })
+
+//togelle todo state 
+app.put('/update-todo/:id', async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ success: false, message: 'id required' });
+    }
+    try {
+        const todo = await Todo.findById(id);
+        if (!todo) {
+            return res.status(404).json({ success: false, message: 'id not found' });
+        }
+
+        // Toggle the `done` state
+        todo.done = !todo.done;
+        await todo.save(); // Save the updated document
+        res.json({
+            success: true,
+            todo,
+        });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+)
