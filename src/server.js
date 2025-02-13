@@ -36,20 +36,47 @@ app.get('/', async (req, res) => {
     }
 })
 // Add a POST route for actually creating todos
-app.post('/addtodo', (req, res) => {
+app.post('/add-todo', (req, res) => {
     console.log('Attempting to create new todo');
-    // const todo = new Todo({
-    //     name: 'call your mom',
-    //     done: true
-    // });
+    const { todo } = req.body;
 
-    // todo.save()
-    //     .then((result) => {
-    //         console.log('Todo saved successfully:', result);
-    //         res.json(result);
-    //     })
-    //     .catch((err) => {
-    //         console.error('Error saving todo:', err);
-    //         res.status(500).json({ error: 'Error saving todo', details: err.message });
-    //     });
+    if (!todo) {
+        return res.status(400).json({ success: false, message: 'Todo field is required' });
+    }
+
+    const addtodo = new Todo({
+        name: todo,
+        done: false
+    });
+
+    addtodo.save()
+        .then((result) => {
+            console.log('Todo saved successfully:', result);
+            res.json(result);
+        })
+        .catch((err) => {
+            console.error('Error saving todo:', err);
+            res.status(500).json({ error: 'Error saving todo', details: err.message });
+        });
 });
+//delete
+app.delete('/delete-todo', async (req, res) => {
+    const { id } = req.body;
+
+    if (!id) {
+        return res.status(400).json({ success: false, message: 'Todo field is required' });
+    }
+    try {
+        const deletedTodo = await Todo.findByIdAndDelete(id);
+        if (!deletedTodo) {
+            return res.status(404).json({ success: false, message: 'Todo not found' });
+        }
+        res.json({
+            success: true,
+            deletedTodo,
+        });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
+    }
+})
