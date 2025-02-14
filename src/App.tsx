@@ -7,6 +7,9 @@ function App() {
 
   return (
     <div>
+      <div>
+        <h1 className='text-white'>T O D O</h1>
+      </div>
       <AddTodo />
       <Todos />
     </div>
