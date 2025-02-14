@@ -10,8 +10,8 @@ const Todos = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     useEffect(() => {
         axios.get(baseURL).then((response) => {
-            setTodos(response.data);
-            console.log(response.data)
+            setTodos(response.data.todos);
+            console.log(response.data.todos)
         })
     }, [])
     return (
