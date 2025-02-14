@@ -1,9 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Todo from './model.js';
+import cors from 'cors'   // correct
 
 const app = express();
-
+app.use(cors({
+    origin: 'http://localhost:3000'  // Replace with your frontend URL
+}));
 // Add middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +21,7 @@ mongoose.connect(dbURL)
         });
     })
     .catch((err) => console.log('MongoDB connection error:', err));
+
 
 // Add a GET route for testing
 app.get('/addtodo', (req, res) => {
