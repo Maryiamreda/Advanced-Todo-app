@@ -11,12 +11,18 @@ const Todos = () => {
     useEffect(() => {
         axios.get(baseURL).then((response) => {
             setTodos(response.data.todos);
-            console.log(response.data.todos)
+            console.log(response)
         })
     }, [])
     return (
-        <div>
-            {todos.map((item, index) => (<div className='text-white'>{item.name}</div>))}
+        <div className='bg-dark-Desaturated-Blue p-3 rounded flex flex-col gap-3'>
+
+            {todos.map((item) => (
+                <div className='text-white flex gap-4'>
+                    <label className='w-5 h-5 border-1 border-gray-700 rounded-full'></label>
+
+                    <div>{item.name}</div>
+                </div>))}
         </div>
     );
 }

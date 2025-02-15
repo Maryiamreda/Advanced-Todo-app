@@ -24,9 +24,7 @@ mongoose.connect(dbURL)
 
 
 // Add a GET route for testing
-app.get('/addtodo', (req, res) => {
-    res.send('GET /addtodo endpoint is working');
-});
+
 app.get('/', async (req, res) => {
     try {
         const todos = await Todo.find({}); // Correctly formatted
