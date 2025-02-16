@@ -3,7 +3,7 @@
 @theme {
   --color-dark-Desaturated-Blue: hsl(235, 24%, 19%);
   --color-dark-grayish-blue: hsl(234, 11%, 52%);
-  --color-light-grayish-blue: hsl(234, 39%, 85%);
+  --color-light-grayish-blue: hsl(234deg 39% 85% / 33%);
 }
 
 :root {
@@ -24,7 +24,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 86vh;
 }
 
 @media only screen and (max-width: 600px) {
