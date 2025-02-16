@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 const baseURL = "http://localhost:3000/";
 
 type Todo = {
@@ -8,6 +8,7 @@ type Todo = {
 }
 const Todos = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
+    const [hoveredId, setHoveredId] = useState<number | null>(null);
     useEffect(() => {
         axios.get(baseURL).then((response) => {
             setTodos(response.data.todos);
@@ -17,11 +18,22 @@ const Todos = () => {
     return (
         <div className='bg-dark-Desaturated-Blue p-3 rounded flex flex-col gap-3'>
 
-            {todos.map((item) => (
-                <div className='text-white flex gap-4'>
-                    <label className='w-5 h-5 border-1 border-gray-700 rounded-full'></label>
+            {todos.map((item, index) => (
+                <div className={`text-white flex justify-between 
+                `}
+                    key={index}
+                    onMouseEnter={() => setHoveredId(index)}
+                    onMouseLeave={() => setHoveredId(null)}
+                >
+                    <div className='flex gap-4'>
+                        <label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
 
-                    <div>{item.name}</div>
+                        <div>{item.name}</div>
+                    </div>
+                    {hoveredId === index && (<div>
+                        <img src='/images/icon-cross.svg' />
+                    </div>)}
+
                 </div>))}
         </div>
     );
