@@ -16,7 +16,7 @@ const Todos = () => {
         })
     }, [])
     return (
-        <div className='bg-dark-Desaturated-Blue rounded flex flex-col gap-3'>
+        <div className='bg-dark-Desaturated-Blue rounded flex flex-col gap-3 '>
 
             {todos.map((item, index) => (
                 <div className='border-b-[0.01px] border-b-light-grayish-blue'
@@ -24,7 +24,7 @@ const Todos = () => {
                     onMouseEnter={() => setHoveredId(index)}
                     onMouseLeave={() => setHoveredId(null)}
                 >
-                    <div className='text-white flex justify-between cursor-pointer '>
+                    <div className='text-white flex justify-between cursor-pointer py-3 px-5 '>
                         <div className='flex gap-4'>
                             <label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
 
