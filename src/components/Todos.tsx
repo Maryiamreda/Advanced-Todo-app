@@ -33,7 +33,9 @@ const Todos = () => {
 
     }, [todos])
     return (
-        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  ' style={{ backgroundColor: elementColor }}>
+        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  ' style={{
+            backgroundColor: elementColor, transition: "background-color 0.5s ease"
+        }}>
             <div className='flex flex-col gap-3'>
                 {todos.map((item, index) => (
                     <div className='border-b-[0.01px] border-b-light-grayish-blue'
@@ -59,7 +61,9 @@ const Todos = () => {
             </div>
 
             <div className='flex justify-between text-xs font-semibold  py-3 px-5 '
-                style={{ color: lightgrayishblue }}
+                style={{
+                    color: lightgrayishblue, transition: "color 0.5s ease"
+                }}
             >
                 <p className='cursor-pointer'>{undone} items left</p>
                 <div className='flex gap-2 cursor-pointer'>
