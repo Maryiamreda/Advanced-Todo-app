@@ -33,7 +33,7 @@ const Todos = () => {
 
     }, [todos])
     return (
-        <div className=' element rounded flex flex-col  ' style={{ backgroundColor: elementColor }}>
+        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  ' style={{ backgroundColor: elementColor }}>
             <div className='flex flex-col gap-3'>
                 {todos.map((item, index) => (
                     <div className='border-b-[0.01px] border-b-light-grayish-blue'
