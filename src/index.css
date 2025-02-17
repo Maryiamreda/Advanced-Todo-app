@@ -18,9 +18,9 @@
 
 body {
   background-color: hsl(235, 21%, 11%);
-  background-image: url('/images/bg-desktop-dark.jpg');
-  background-repeat: no-repeat;
-  background-size: contain;
+  /* background-image: url('/images/bg-desktop-dark.jpg'); */
+  /* background-repeat: no-repeat;
+  background-size: contain; */
   margin: 0;
   display: flex;
   place-items: center;
