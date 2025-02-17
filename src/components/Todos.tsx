@@ -36,9 +36,10 @@ const Todos = () => {
         <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  ' style={{
             backgroundColor: elementColor, transition: "background-color 0.5s ease"
         }}>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 '>
                 {todos.map((item, index) => (
-                    <div className='border-b-[0.01px] border-b-light-grayish-blue'
+                    <div className='border-b-[0.01px] border-b-light-grayish-blue transition duration-150 ease-in-out hover:scale-100  hover:shadow-lg
+'
                         key={index}
                         onMouseEnter={() => setHoveredId(index)}
                         onMouseLeave={() => setHoveredId(null)}

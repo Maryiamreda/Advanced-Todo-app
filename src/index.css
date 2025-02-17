@@ -18,9 +18,7 @@
 
 body {
   background-color: hsl(235, 21%, 11%);
-  /* background-image: url('/images/bg-desktop-dark.jpg'); */
-  /* background-repeat: no-repeat;
-  background-size: contain; */
+
   transition: background-color 0.5s ease, background-image 0.5s ease, color 0.5s ease;
 
   margin: 0;
@@ -30,11 +28,6 @@ body {
   min-height: 86vh;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    background-image: url('/images/bg-mobile-dark.jpg');
-  }
-}
 
 .check {
   background-image: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
