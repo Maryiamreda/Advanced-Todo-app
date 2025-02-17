@@ -33,7 +33,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         setTheme(theme === "light" ? "dark" : "light");
     };
     //Defines a function to switch between light and dark themes.
-    const color = theme === "light" ? " black" : "white";
+    const color = theme === "light" ? " hsl(235, 19%, 35%)" : "white";
     const backgroundColor = theme === "light" ? " hsl(0, 0%, 98%)" : " hsl(235, 21%, 11%)";
     const elementColor = theme === "light" ? "white" : "hsl(235, 24%, 19%)";
     const darkgrayishblue = theme === "light" ? "hsl(236, 9%, 61%)" : "hsl(234deg 39% 85% / 33%)";

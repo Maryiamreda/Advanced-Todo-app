@@ -33,7 +33,7 @@ const Todos = () => {
 
     }, [todos])
     return (
-        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  '
+        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl   '
             style={{
                 backgroundColor: elementColor, transition: "background-color 0.5s ease"
             }}>
@@ -47,8 +47,11 @@ const Todos = () => {
                     >
                         <div className=' flex justify-between cursor-pointer py-3 px-5  '>
                             <div className='flex gap-4'>
-                                {item.done ? (<div className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'><img src='/images/icon-check.svg ' /></div>) : (<label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
-                                )}
+                                {item.done ? (<div className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'><img src='/images/icon-check.svg ' /></div>) :
+                                    (<div className='flex justify-center items-center'>
+                                        <label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
+                                    </div>
+                                    )}
 
                                 <div className={`${item.done ? 'line-through ' : 'no-underline'}`}
                                     style={{
@@ -68,16 +71,16 @@ const Todos = () => {
                     </div>))}
             </div>
 
-            <div className='flex justify-between text-xs font-semibold  py-3 px-5 '
+            <div className=' sortoptions flex justify-between text-xs font-semibold  py-3 px-5 '
                 style={{
                     color: darkgrayishblue, transition: "color 0.5s ease"
                 }}
             >
                 <p className='cursor-pointer'>{undone} items left</p>
                 <div className='flex gap-2 cursor-pointer'>
-                    <p>All</p>
-                    <p>Active</p>
-                    <p>Completed</p>
+                    <p className=''>All</p>
+                    <p className=''>Active</p>
+                    <p className=''>Completed</p>
                 </div>
                 <p className='cursor-pointer'> Clear Completed</p>
             </div>

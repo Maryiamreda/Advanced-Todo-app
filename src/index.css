@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --color-dark-Desaturated-Blue: hsl(235, 24%, 19%);
   --color-dark-grayish-blue: hsl(234, 11%, 52%);
   --color-light-grayish-blue: hsl(234deg 39% 85% / 33%);
-
+  --color-Bright-Blue: hsl(220, 98%, 61%)
 }
 
 :root {
+  font-family: "Josefin Sans", serif;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,4 +34,9 @@ body {
 .check {
   background-image: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 
+}
+
+.sortoptions p:hover,
+.sortoptions p:focus {
+  color: hsl(220, 98%, 61%);
 }
