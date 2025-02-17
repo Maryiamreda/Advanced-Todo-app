@@ -9,6 +9,7 @@ type ThemeContextType = {
     lightgrayishblue: string;
 
 };
+
 export const ThemeContext = createContext<ThemeContextType>({
     theme: "dark",
     toggleTheme: () => { },

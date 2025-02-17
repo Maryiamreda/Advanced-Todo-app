@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '../ThemeProvider';
+import { ThemeContext } from '../context/ThemeProvider';
+import { AppContext } from '../context/AppContext';
 
 const baseURL = "http://localhost:3000/";
 
@@ -10,9 +11,11 @@ type Todo = {
 }
 const Todos = () => {
     const themeContext = useContext(ThemeContext);
-    const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
+    const appContext = useContext(AppContext);
 
-    const [todos, setTodos] = useState<Todo[]>([]);
+    const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
+    const { todos } = appContext;
+
     const [hoveredId, setHoveredId] = useState<number | null>(null);
     const [undone, setUndone] = useState(0)
     const undoneTodos = (array: Todo[]) => {
@@ -21,17 +24,10 @@ const Todos = () => {
         return c;
     }
     useEffect(() => {
-        axios.get(baseURL).then((response) => {
-            setTodos(response.data.todos);
-            console.log(response);
-            setUndone(undoneTodos(response.data.todos))
-
-        })
-    }, [])
-    useEffect(() => {
         setUndone(undoneTodos(todos))
+    }, [])
 
-    }, [todos])
+
     return (
         <div className=' element rounded flex flex-col shadow-lg md:shadow-xl   '
             style={{

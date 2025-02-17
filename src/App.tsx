@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import './App.css'
 import AddTodo from './components/addTodo'
 import Todos from './components/Todos'
-import { ThemeContext } from './ThemeProvider';
+import { ThemeContext } from './context/ThemeProvider';
 function App() {
   const themeContext = useContext(ThemeContext);
   // Handle the case where ThemeContext is undefined
