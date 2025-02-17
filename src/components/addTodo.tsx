@@ -3,7 +3,7 @@ import { ThemeContext } from '../ThemeProvider';
 
 const AddTodo = () => {
     const themeContext = useContext(ThemeContext);
-    const { elementColor } = themeContext;
+    const { elementColor, darkgrayishblue } = themeContext;
 
     return (
         <div style={{
@@ -14,7 +14,7 @@ const AddTodo = () => {
             <div
                 className=''>
 
-                <input className='bg-transparent outline-none  ' placeholder='Create a New Todo...' />
+                <input className='bg-transparent outline-none  ' style={{ color: darkgrayishblue }} placeholder='Create a New Todo...' />
             </div>
 
 

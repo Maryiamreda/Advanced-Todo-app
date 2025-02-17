@@ -5,14 +5,16 @@ type ThemeContextType = {
     theme: Theme;
     toggleTheme: () => void;
     elementColor: string;
+    darkgrayishblue: string;
     lightgrayishblue: string;
+
 };
 export const ThemeContext = createContext<ThemeContextType>({
     theme: "dark",
     toggleTheme: () => { },
     elementColor: "white",
-    lightgrayishblue: "red",
-
+    darkgrayishblue: "red",
+    lightgrayishblue: "hsl(233, 11%, 84%)",
 
 
 });
@@ -34,7 +36,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const color = theme === "light" ? " black" : "white";
     const backgroundColor = theme === "light" ? " hsl(0, 0%, 98%)" : " hsl(235, 21%, 11%)";
     const elementColor = theme === "light" ? "white" : "hsl(235, 24%, 19%)";
-    const lightgrayishblue = theme === "light" ? "hsl(236, 9%, 61%)" : "hsl(234deg 39% 85% / 33%)";
+    const darkgrayishblue = theme === "light" ? "hsl(236, 9%, 61%)" : "hsl(234deg 39% 85% / 33%)";
+    const lightgrayishblue = theme === "light" ? "hsl(233, 11%, 84%)" : " hsl(234deg 39% 85% / 33%)";
+
     const backgroundImage = theme === "light" ? "/images/bg-desktop-light.jpg" : "/images/bg-desktop-dark.jpg";
 
     //Sets color values based on the current theme.
@@ -48,7 +52,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     //Updates the document body styles when the theme changes.
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme, elementColor, lightgrayishblue }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, elementColor, darkgrayishblue, lightgrayishblue }}>
             {children}
         </ThemeContext.Provider>
     );

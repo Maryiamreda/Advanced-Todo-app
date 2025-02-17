@@ -10,7 +10,7 @@ type Todo = {
 }
 const Todos = () => {
     const themeContext = useContext(ThemeContext);
-    const { elementColor, lightgrayishblue } = themeContext;
+    const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
 
     const [todos, setTodos] = useState<Todo[]>([]);
     const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -33,9 +33,10 @@ const Todos = () => {
 
     }, [todos])
     return (
-        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  ' style={{
-            backgroundColor: elementColor, transition: "background-color 0.5s ease"
-        }}>
+        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl  '
+            style={{
+                backgroundColor: elementColor, transition: "background-color 0.5s ease"
+            }}>
             <div className='flex flex-col gap-3 '>
                 {todos.map((item, index) => (
                     <div className='border-b-[0.01px] border-b-light-grayish-blue transition duration-150 ease-in-out hover:scale-100  hover:shadow-lg
@@ -44,12 +45,18 @@ const Todos = () => {
                         onMouseEnter={() => setHoveredId(index)}
                         onMouseLeave={() => setHoveredId(null)}
                     >
-                        <div className=' flex justify-between cursor-pointer py-3 px-5 '>
+                        <div className=' flex justify-between cursor-pointer py-3 px-5  '>
                             <div className='flex gap-4'>
                                 {item.done ? (<div className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'><img src='/images/icon-check.svg ' /></div>) : (<label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
                                 )}
 
-                                <div className=''>{item.name}</div>
+                                <div className={`${item.done ? 'line-through ' : 'no-underline'}`}
+                                    style={{
+                                        color: item.done ? lightgrayishblue : '',
+
+                                    }}
+
+                                >{item.name}</div>
                             </div>
                             {hoveredId === index && (
                                 <div>
@@ -63,7 +70,7 @@ const Todos = () => {
 
             <div className='flex justify-between text-xs font-semibold  py-3 px-5 '
                 style={{
-                    color: lightgrayishblue, transition: "color 0.5s ease"
+                    color: darkgrayishblue, transition: "color 0.5s ease"
                 }}
             >
                 <p className='cursor-pointer'>{undone} items left</p>
