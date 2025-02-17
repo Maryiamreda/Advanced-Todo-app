@@ -14,9 +14,9 @@ function App() {
 
   return (
     <div className='flex flex-col gap-5 w-[400px]'>
-      <div className='flex justify-between'>
-        <h1 className='text-white'>T O D O</h1>
-        <div onClick={toggleTheme} className='cursor-pointer'>
+      <div className='flex justify-between mb-4'>
+        <h1 className='text-white font-semibold  text-4xl'>T O D O</h1>
+        <div onClick={toggleTheme} className='cursor-pointer w-5 h-5 flex justify-center items-center'>
           {theme == 'dark' ? (<img src='/images/icon-sun.svg' />) : (<img src='/images/icon-moon.svg' />)}
 
         </div>

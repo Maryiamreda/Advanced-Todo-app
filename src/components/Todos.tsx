@@ -43,7 +43,7 @@ const Todos = () => {
                     >
                         <div className=' flex justify-between cursor-pointer py-3 px-5 '>
                             <div className='flex gap-4'>
-                                {item.done ? (<div className='check  w-5 h-5   rounded-full cursor-pointer flex justify-center items-center'><img src='/images/icon-check.svg ' /></div>) : (<label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
+                                {item.done ? (<div className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'><img src='/images/icon-check.svg ' /></div>) : (<label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
                                 )}
 
                                 <div className=''>{item.name}</div>
