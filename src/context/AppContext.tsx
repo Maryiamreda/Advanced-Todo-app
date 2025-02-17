@@ -43,7 +43,6 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
     }
 
 
-
     useEffect(() => {
 
         const fetchTodos = async () => {

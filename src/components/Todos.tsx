@@ -15,7 +15,6 @@ const Todos = () => {
 
     const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
     const { todos } = appContext;
-
     const [hoveredId, setHoveredId] = useState<number | null>(null);
     const [undone, setUndone] = useState(0)
     const undoneTodos = (array: Todo[]) => {
@@ -25,7 +24,7 @@ const Todos = () => {
     }
     useEffect(() => {
         setUndone(undoneTodos(todos))
-    }, [])
+    }, [todos])
 
 
     return (
