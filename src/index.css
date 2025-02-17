@@ -22,12 +22,12 @@ body {
   background-color: hsl(235, 21%, 11%);
 
   transition: background-color 0.5s ease, background-image 0.5s ease, color 0.5s ease;
-
+  overflow: hidden;
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 86vh;
+  min-height: 110vh;
 }
 
 
@@ -39,4 +39,10 @@ body {
 .sortoptions p:hover,
 .sortoptions p:focus {
   color: hsl(220, 98%, 61%);
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
 }
