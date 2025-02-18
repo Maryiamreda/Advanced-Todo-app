@@ -25,7 +25,6 @@ const Todos = () => {
         setUndone(undoneTodos(todos))
     }, [todos])
 
-
     return (
         <div className=' element rounded flex flex-col shadow-lg md:shadow-xl    '
             style={{
