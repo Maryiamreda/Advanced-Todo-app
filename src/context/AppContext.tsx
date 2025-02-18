@@ -3,6 +3,7 @@ import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 // Define the Todo interface
 interface Todo {
+    _id: string;
     name: string;
     done: boolean;
 }
@@ -11,7 +12,8 @@ interface Todo {
 interface TodoContextType {
     todos: Todo[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-    addTodo: (todo: string) => void;  // Changed type to match implementation
+    addTodo: (todo: string) => void;  // Changed type to match implementation ;
+    checkTodo: (id: string) => void
 }
 const baseURL = "http://localhost:3000/";
 
@@ -20,6 +22,9 @@ export const AppContext = createContext<TodoContextType>({
     todos: [],
     setTodos: () => { },
     addTodo: () => { },
+    checkTodo: () => {
+
+    },
 });
 
 interface AppProviderProps {
@@ -35,14 +40,30 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         })
             .then(function (response) {
                 console.log(response);
-                setTodos(prev => [...prev, { name: todo, done: false }]);  // Update local state
+                setTodos(prev => [...prev, response.data.todo]);  // Use the todo object from the server response
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
 
-
+    const checkTodo = async (id: string) => {
+        try {
+            const response = await axios.put(`${baseURL}update-todo/${id}`);
+            if (response.data.success) {
+                // Update the specific todo in the current state
+                setTodos(prevTodos =>
+                    prevTodos.map(todo =>
+                        todo._id === id ? { ...todo, done: !todo.done } : todo
+                    )
+                );
+            } else {
+                console.error(response.data.message);
+            }
+        } catch (error) {
+            console.error("Error fetching todos:", error);
+        }
+    }
     useEffect(() => {
 
         const fetchTodos = async () => {
@@ -56,7 +77,7 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         fetchTodos();
     }, []);
     return (
-        <AppContext.Provider value={{ todos, setTodos, addTodo }}>
+        <AppContext.Provider value={{ todos, setTodos, addTodo, checkTodo }}>
             {children}
         </AppContext.Provider>
     );

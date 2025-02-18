@@ -1,11 +1,10 @@
-import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../context/ThemeProvider';
 import { AppContext } from '../context/AppContext';
 
-const baseURL = "http://localhost:3000/";
 
 type Todo = {
+    _id: string;
     name: string;
     done: boolean;
 }
@@ -14,7 +13,7 @@ const Todos = () => {
     const appContext = useContext(AppContext);
 
     const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
-    const { todos } = appContext;
+    const { todos, checkTodo } = appContext;
     const [hoveredId, setHoveredId] = useState<number | null>(null);
     const [undone, setUndone] = useState(0)
     const undoneTodos = (array: Todo[]) => {
@@ -42,9 +41,14 @@ const Todos = () => {
                     >
                         <div className=' flex justify-between cursor-pointer py-3 px-5  '>
                             <div className='flex gap-4'>
-                                {item.done ? (<div className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'><img src='/images/icon-check.svg ' /></div>) :
+                                {item.done ?
+                                    (
+                                        <div onClick={() => checkTodo(item._id)} className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'>
+                                            <img src='/images/icon-check.svg ' />
+                                        </div>)
+                                    :
                                     (<div className='flex justify-center items-center'>
-                                        <label className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
+                                        <label onClick={() => checkTodo(item._id)} className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
                                     </div>
                                     )}
 
