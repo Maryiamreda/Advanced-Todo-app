@@ -32,19 +32,10 @@ body {
 
 
 .check {
-  background-image: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-  transition: all 0.3s;
-
-
+  transition: all 0.07s;
 }
 
-.undone {
-  transition: all 0.3s;
-
-}
-
-.check:active,
-.undone:active {
+.check:active {
   transform: scale(1.4);
   transform-origin: bottom;
 }

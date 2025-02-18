@@ -41,29 +41,21 @@ const Todos = () => {
                     >
                         <div className=' flex justify-between cursor-pointer py-3 px-5  '>
                             <div className='flex gap-4'>
+                                <div onClick={() => checkTodo(item._id)}
+                                    className='check   w-5 h-5 rounded-full  cursor-pointer flex justify-center items-center'
+                                    style={{
+                                        border: item.done ? 'transparent' : '1px solid hsl(233, 14%, 35%)',
+                                        backgroundImage: item.done ? 'linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%))' : 'none'
+                                    }}
+                                >
+                                    {item.done && <img src='/images/icon-check.svg ' />}
 
-
-
-                                {item.done ?
-                                    (
-                                        <div onClick={() => checkTodo(item._id)} className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'>
-                                            <img src='/images/icon-check.svg ' />
-                                        </div>)
-                                    :
-                                    (<div className='flex justify-center items-center'>
-                                        <label onClick={() => checkTodo(item._id)}
-                                            className='undone w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'
-
-                                        ></label>
-                                    </div>
-                                    )}
-
+                                </div>
                                 <div className={`${item.done ? 'line-through ' : 'no-underline'}`}
                                     style={{
                                         color: item.done ? lightgrayishblue : '',
 
                                     }}
-
                                 >{item.name}</div>
                             </div>
                             {hoveredId === index && (
@@ -71,8 +63,6 @@ const Todos = () => {
                                     <img src='/images/icon-cross.svg ' className='cursor-pointer' />
                                 </div>)}
                         </div>
-
-
                     </div>))}
             </div>
 
