@@ -41,6 +41,9 @@ const Todos = () => {
                     >
                         <div className=' flex justify-between cursor-pointer py-3 px-5  '>
                             <div className='flex gap-4'>
+
+
+
                                 {item.done ?
                                     (
                                         <div onClick={() => checkTodo(item._id)} className='check  w-5 h-5 rounded-full cursor-pointer flex justify-center items-center'>
@@ -48,7 +51,10 @@ const Todos = () => {
                                         </div>)
                                     :
                                     (<div className='flex justify-center items-center'>
-                                        <label onClick={() => checkTodo(item._id)} className='w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'></label>
+                                        <label onClick={() => checkTodo(item._id)}
+                                            className='undone w-5 h-5 border-1 border-gray-700 rounded-full cursor-pointer'
+
+                                        ></label>
                                     </div>
                                     )}
 
