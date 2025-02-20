@@ -14,20 +14,26 @@ const Todos = () => {
     const { todos, checkTodo, deleteTodo } = appContext;
     const [hoveredId, setHoveredId] = useState<number | null>(null);
     const [undone, setUndone] = useState(0);
+    const [filterd, setFilterd] = useState<Todo[]>([]);
+
 
     const ondeleteTranition: React.CSSProperties = {
         left: " -100%",
         transition: "left 0.5s ease-in-out"
     };
     const [deleteActionId, setDeleteActionId] = useState('');
-    const undoneTodos = (array: Todo[]) => {
-        let c = 0;
-        array.map((item) => { if (item.done === false) { c++ } })
-        return c;
-    }
+
 
     useEffect(() => {
-        setUndone(undoneTodos(todos))
+
+        const undoneTodos = (array: Todo[]) => {
+            let c = 0;
+            array.map((item) => { if (item.done === false) { c++; } })
+            return c;
+        }
+        setUndone(undoneTodos(todos));
+        setFilterd(todos);  // Set initial filtered state to all todos
+
     }, [todos])
 
     return (
@@ -36,7 +42,7 @@ const Todos = () => {
                 backgroundColor: elementColor, transition: "background-color 0.5s ease"
             }}>
             <div className=' scrollbar flex flex-col gap-3 h-80 overflow-y-scroll scroll-smooth '>
-                {todos?.map((item, index) => (
+                {filterd?.map((item, index) => (
                     <div className='border-b-[0.01px] border-b-light-grayish-blue 
                     transition duration-150 ease-in-out hover:scale-100
                   relative  left-0  hover:shadow-lg'
@@ -83,10 +89,10 @@ const Todos = () => {
                 }}
             >
                 <p className='cursor-pointer'>{undone} items left</p>
-                <div className='flex gap-2 cursor-pointer'>
-                    <p className=''>All</p>
-                    <p className=''>Active</p>
-                    <p className=''>Completed</p>
+                <div className='flex gap-2 cursor-pointer '>
+                    <p className=' ' onClick={() => setFilterd(todos)}>All</p>
+                    <p className=' ' onClick={() => setFilterd(todos.filter(todo => !todo.done))}>Active</p>
+                    <p className=' ' onClick={() => setFilterd(todos.filter(todo => todo.done))}>Completed</p>
                 </div>
                 <p className='cursor-pointer'> Clear Completed</p>
             </div>
