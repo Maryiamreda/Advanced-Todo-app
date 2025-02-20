@@ -13,7 +13,9 @@ interface TodoContextType {
     todos: Todo[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     addTodo: (todo: string) => void;  // Changed type to match implementation ;
-    checkTodo: (id: string) => void
+    checkTodo: (id: string) => void;
+    deleteTodo: (id: string) => void;
+
 }
 const baseURL = "http://localhost:3000/";
 
@@ -22,9 +24,8 @@ export const AppContext = createContext<TodoContextType>({
     todos: [],
     setTodos: () => { },
     addTodo: () => { },
-    checkTodo: () => {
-
-    },
+    checkTodo: () => { },
+    deleteTodo: () => { },
 });
 
 interface AppProviderProps {
@@ -47,6 +48,22 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
             });
     }
 
+    const deleteTodo = (async (id: string) => {
+
+        try {
+            const response = await axios.delete(`${baseURL}delete-todo/${id}`);
+            if (response.data.success) {
+                // Update the specific todo in the current state
+                setTodos(prevTodos => prevTodos.filter(todo => todo._id !== id));
+
+            } else {
+                console.error(response.data.message);
+            }
+        } catch (error) {
+            console.error("Error deletung todo:", error);
+        }
+
+    })
     const checkTodo = async (id: string) => {
         try {
             const response = await axios.put(`${baseURL}update-todo/${id}`);
@@ -77,7 +94,7 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         fetchTodos();
     }, []);
     return (
-        <AppContext.Provider value={{ todos, setTodos, addTodo, checkTodo }}>
+        <AppContext.Provider value={{ todos, setTodos, addTodo, checkTodo, deleteTodo }}>
             {children}
         </AppContext.Provider>
     );

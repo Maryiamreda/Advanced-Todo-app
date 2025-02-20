@@ -11,16 +11,23 @@ type Todo = {
 const Todos = () => {
     const themeContext = useContext(ThemeContext);
     const appContext = useContext(AppContext);
-
     const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
-    const { todos, checkTodo } = appContext;
+    const { todos, checkTodo, deleteTodo } = appContext;
     const [hoveredId, setHoveredId] = useState<number | null>(null);
-    const [undone, setUndone] = useState(0)
+    const [undone, setUndone] = useState(0);
+
+    const ondeleteTranition: React.CSSProperties = {
+        position: "relative" as const,
+        transform: "translateX(-100%)",
+        transition: "all 10s ease"
+    };
+    const [deleteActionId, setDeleteActionId] = useState('');
     const undoneTodos = (array: Todo[]) => {
         let c = 0;
         array.map((item) => { if (item.done === false) { c++ } })
         return c;
     }
+
     useEffect(() => {
         setUndone(undoneTodos(todos))
     }, [todos])
@@ -32,8 +39,11 @@ const Todos = () => {
             }}>
             <div className=' scrollbar flex flex-col gap-3 h-80 overflow-y-scroll scroll-smooth '>
                 {todos.map((item, index) => (
-                    <div className='border-b-[0.01px] border-b-light-grayish-blue transition duration-150 ease-in-out hover:scale-100  hover:shadow-lg
-'
+                    <div className='border-b-[0.01px] border-b-light-grayish-blue 
+                    transition duration-150 ease-in-out hover:scale-100
+                    left-80  hover:shadow-lg'
+                        style={deleteActionId === item._id ? ondeleteTranition : {}}
+
                         key={index}
                         onMouseEnter={() => setHoveredId(index)}
                         onMouseLeave={() => setHoveredId(null)}
@@ -59,10 +69,14 @@ const Todos = () => {
                             </div>
                             {hoveredId === index && (
                                 <div>
-                                    <img src='/images/icon-cross.svg ' className='cursor-pointer' />
+                                    <img src='/images/icon-cross.svg ' className='cursor-pointer' onClick={() => {
+                                        setDeleteActionId(item._id),
+                                            deleteTodo(item._id)
+                                    }} />
                                 </div>)}
                         </div>
-                    </div>))}
+                    </div>)
+                )}
             </div>
 
             <div className=' sortoptions flex justify-between text-xs font-semibold  py-3 px-5 '
@@ -78,7 +92,7 @@ const Todos = () => {
                 </div>
                 <p className='cursor-pointer'> Clear Completed</p>
             </div>
-        </div>
+        </div >
     );
 }
 
