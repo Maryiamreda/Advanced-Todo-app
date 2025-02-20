@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../context/ThemeProvider';
 import { AppContext } from '../context/AppContext';
 
-
 type Todo = {
     _id: string;
     name: string;
@@ -37,7 +36,7 @@ const Todos = () => {
                 backgroundColor: elementColor, transition: "background-color 0.5s ease"
             }}>
             <div className=' scrollbar flex flex-col gap-3 h-80 overflow-y-scroll scroll-smooth '>
-                {todos.map((item, index) => (
+                {todos?.map((item, index) => (
                     <div className='border-b-[0.01px] border-b-light-grayish-blue 
                     transition duration-150 ease-in-out hover:scale-100
                   relative  left-0  hover:shadow-lg'

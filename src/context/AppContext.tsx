@@ -41,7 +41,7 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         })
             .then(function (response) {
                 console.log(response);
-                setTodos(prev => [...prev, response.data.todo]);  // Use the todo object from the server response
+                setTodos(prev => [...prev, response.data]);  // Use the todo object from the server response
             })
             .catch(function (error) {
                 console.log(error);
@@ -87,6 +87,14 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
             try {
                 const response = await axios.get(baseURL);
                 setTodos(response.data.todos);
+                if (response.data.success) {
+                    // Update the specific todo in the current state
+                    console.error(response.data.message);
+
+
+                } else {
+                    console.error(response.data.message);
+                }
             } catch (error) {
                 console.error("Error fetching todos:", error);
             }
