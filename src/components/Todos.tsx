@@ -17,9 +17,8 @@ const Todos = () => {
     const [undone, setUndone] = useState(0);
 
     const ondeleteTranition: React.CSSProperties = {
-        position: "relative" as const,
-        transform: "translateX(-100%)",
-        transition: "all 10s ease"
+        left: " -100%",
+        transition: "left 0.5s ease-in-out"
     };
     const [deleteActionId, setDeleteActionId] = useState('');
     const undoneTodos = (array: Todo[]) => {
@@ -41,7 +40,7 @@ const Todos = () => {
                 {todos.map((item, index) => (
                     <div className='border-b-[0.01px] border-b-light-grayish-blue 
                     transition duration-150 ease-in-out hover:scale-100
-                    left-80  hover:shadow-lg'
+                  relative  left-0  hover:shadow-lg'
                         style={deleteActionId === item._id ? ondeleteTranition : {}}
 
                         key={index}
