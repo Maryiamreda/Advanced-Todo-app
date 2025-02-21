@@ -11,10 +11,13 @@ interface Todo {
 // Define the context type including both state and setter
 interface TodoContextType {
     todos: Todo[];
+    completed: string[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     addTodo: (todo: string) => void;  // Changed type to match implementation ;
     checkTodo: (id: string) => void;
     deleteTodo: (id: string) => void;
+    clearCompleted: () => void;
+
 
 }
 const baseURL = "http://localhost:3000/";
@@ -22,10 +25,13 @@ const baseURL = "http://localhost:3000/";
 // Create context with proper type and default value
 export const AppContext = createContext<TodoContextType>({
     todos: [],
+    completed: [],
     setTodos: () => { },
     addTodo: () => { },
     checkTodo: () => { },
     deleteTodo: () => { },
+    clearCompleted: () => { },
+
 });
 
 interface AppProviderProps {
@@ -34,6 +40,7 @@ interface AppProviderProps {
 
 export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [todos, setTodos] = useState<Todo[]>([]);
+    const [completed, setCompleted] = useState<string[]>([]);
 
     const addTodo = (todo: string) => {  // Moved outside useEffect
         axios.post(`${baseURL}add-todo`, {
@@ -47,6 +54,25 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
                 console.log(error);
             });
     }
+    const clearCompleted = (async () => {
+
+        try {
+            const response = await axios.delete(`${baseURL}delete-todo-completed/`);
+            if (response.data.success) {
+                // console.log(response.data);
+                const deletedIds = response.data.deletedIds;
+                setCompleted(deletedIds);
+                // Update the specific todo in the current state
+                // setTodos(prevTodos => prevTodos.filter(todo => todo.done == false));
+            } else {
+                console.error(response.data.message);
+            }
+        } catch (error) {
+            console.error("Error deletung todo:", error);
+        }
+
+    })
+
 
     const deleteTodo = (async (id: string) => {
 
@@ -102,7 +128,7 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         fetchTodos();
     }, []);
     return (
-        <AppContext.Provider value={{ todos, setTodos, addTodo, checkTodo, deleteTodo }}>
+        <AppContext.Provider value={{ todos, completed, setTodos, addTodo, checkTodo, deleteTodo, clearCompleted }}>
             {children}
         </AppContext.Provider>
     );

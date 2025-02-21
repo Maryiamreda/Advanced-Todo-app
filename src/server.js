@@ -110,3 +110,20 @@ app.put('/update-todo/:id', async (req, res) => {
 }
 
 )
+// Delete all completed todos
+app.delete('/delete-todo-completed', async (req, res) => {
+    try {
+        const todosToDelete = await Todo.find({ done: true }).select('_id');
+        const deletedIds = todosToDelete.map(todo => todo._id);
+        const result = await Todo.deleteMany({ done: true });
+        console.log('Deleted completed todos:', result);
+        res.json({
+            success: true,
+            deletedCount: result.deletedCount,
+            deletedIds: deletedIds
+        });
+    } catch (error) {
+        console.error('Error deleting completed todos:', error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
