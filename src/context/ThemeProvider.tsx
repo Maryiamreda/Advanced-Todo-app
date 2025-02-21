@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 
 type Theme = "light" | "dark";
 type ThemeContextType = {
@@ -28,6 +28,20 @@ interface ThemeProviderProps {
 //Defines the ThemeProvider component, typed with React.FC and the props interface.
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState<Theme>("light");
+    const [isMobile, setIsMobile] = useState(false);
+
+    let mql = window.matchMedia("(max-width: 900px)");
+    // Handle mobile detection
+    useEffect(() => {
+        const handleResize = (e: MediaQueryListEvent | MediaQueryList) => {
+            setIsMobile(e.matches);
+        };
+
+        handleResize(mql); // Initial check
+        mql.addListener(handleResize);
+
+        return () => mql.removeListener(handleResize);
+    }, []);
 
     //Creates a state variable for the theme with "light" as the default.
     const toggleTheme = () => {
@@ -41,15 +55,22 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const lightgrayishblue = theme === "light" ? "hsl(233, 11%, 84%)" : " hsl(234deg 39% 85% / 33%)";
 
     const backgroundImage = theme === "light" ? "/images/bg-desktop-light.jpg" : "/images/bg-desktop-dark.jpg";
-
+    const mobbg = theme === "light" ? "/images/bg-mobile-light.jpg" : "/images/bg-mobile-dark.jpg";
     //Sets color values based on the current theme.
-    React.useEffect(() => {
+    useEffect(() => {
         document.body.style.color = color;
         document.body.style.backgroundColor = backgroundColor;
-        document.body.style.backgroundImage = `url(${backgroundImage})`;
+        if (isMobile) {
+            document.body.style.backgroundImage = `url(${mobbg})`;
+
+
+        } else {
+            document.body.style.backgroundImage = `url(${backgroundImage})`;
+
+        }
         document.body.style.backgroundSize = "contain";
         document.body.style.backgroundRepeat = "no-repeat";
-    }, [theme, color, backgroundColor]);
+    }, [theme, color, backgroundColor, mql]);
     //Updates the document body styles when the theme changes.
 
     return (

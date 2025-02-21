@@ -35,11 +35,13 @@ const Todos = () => {
     }, [todos])
 
     return (
-        <div className=' element rounded flex flex-col shadow-lg md:shadow-xl    '
-            style={{
-                backgroundColor: elementColor, transition: "background-color 0.5s ease"
-            }}>
-            <div className=' scrollbar flex flex-col gap-3 h-80 overflow-y-scroll scroll-smooth '>
+        <div className=' element rounded flex flex-col     '
+        >
+            <div className=' scrollbar flex flex-col gap-3 h-80 overflow-y-scroll scroll-smooth shadow-lg md:shadow-xl '
+                style={{
+                    backgroundColor: elementColor, transition: "background-color 0.5s ease"
+                }}
+            >
                 {filterd?.map((item, index) => (
                     <div className='todo border-b-[0.01px] border-b-light-grayish-blue 
                     transition duration-150 ease-in-out hover:scale-100
@@ -82,10 +84,16 @@ const Todos = () => {
                 )}
             </div>
 
-            <div className=' sortoptions flex justify-between text-xs font-semibold  py-3 px-5 '
+            <div className=' sortoptions flex justify-between text-xs font-semibold  py-3 px-5 shadow-lg md:shadow-xl
+            mt-5 md:mt-0
+            '
                 style={{
-                    color: darkgrayishblue, transition: "color 0.5s ease"
+                    color: darkgrayishblue, transition: "color 0.5s ease, background-color 0.5s ease"
+                    , backgroundColor: elementColor
+
                 }}
+
+
             >
                 <p className='cursor-pointer'>{undone} items left</p>
                 <div className='flex gap-2 cursor-pointer '>

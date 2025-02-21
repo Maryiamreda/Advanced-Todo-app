@@ -30,6 +30,12 @@ body {
   min-height: 110vh;
 }
 
+@media only screen and (max-width: 600px) {
+  body {
+    min-height: 70vh;
+
+  }
+}
 
 .check {
   transition: all 0.07s;
