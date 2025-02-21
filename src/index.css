@@ -50,3 +50,17 @@ body {
   height: 0px;
   background-color: transparent;
 }
+
+.todo {
+  animation: 0.9s 1 alternate slide-in;
+}
+
+@keyframes slide-in {
+  from {
+    translate: 150vw 0;
+  }
+
+  to {
+    translate: 0 0;
+  }
+}

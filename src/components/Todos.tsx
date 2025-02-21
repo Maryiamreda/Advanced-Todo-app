@@ -43,9 +43,11 @@ const Todos = () => {
             }}>
             <div className=' scrollbar flex flex-col gap-3 h-80 overflow-y-scroll scroll-smooth '>
                 {filterd?.map((item, index) => (
-                    <div className='border-b-[0.01px] border-b-light-grayish-blue 
+                    <div className='todo border-b-[0.01px] border-b-light-grayish-blue 
                     transition duration-150 ease-in-out hover:scale-100
-                  relative  left-0  hover:shadow-lg'
+                  relative  left-0  hover:shadow-lg
+
+                  '
                         style={deleteActionId === item._id ? ondeleteTranition : {}}
 
                         key={index}
@@ -90,9 +92,9 @@ const Todos = () => {
             >
                 <p className='cursor-pointer'>{undone} items left</p>
                 <div className='flex gap-2 cursor-pointer '>
-                    <p className=' ' onClick={() => setFilterd(todos)}>All</p>
-                    <p className=' ' onClick={() => setFilterd(todos.filter(todo => !todo.done))}>Active</p>
-                    <p className=' ' onClick={() => setFilterd(todos.filter(todo => todo.done))}>Completed</p>
+                    <button className=' cursor-pointer hover:text-Bright-Blue focus:text-Bright-Blue ' onClick={() => setFilterd(todos)}>All</button>
+                    <button className=' cursor-pointer hover:text-Bright-Blue focus:text-Bright-Blue ' onClick={() => setFilterd(todos.filter(todo => !todo.done))}>Active</button>
+                    <button className=' cursor-pointer hover:text-Bright-Blue focus:text-Bright-Blue ' onClick={() => setFilterd(todos.filter(todo => todo.done))}>Completed</button>
                 </div>
                 <p className='cursor-pointer'> Clear Completed</p>
             </div>
