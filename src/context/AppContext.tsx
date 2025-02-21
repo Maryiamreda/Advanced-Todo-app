@@ -11,7 +11,6 @@ interface Todo {
 // Define the context type including both state and setter
 interface TodoContextType {
     todos: Todo[];
-    completed: string[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     addTodo: (todo: string) => void;  // Changed type to match implementation ;
     checkTodo: (id: string) => void;
@@ -25,7 +24,6 @@ const baseURL = "http://localhost:3000/";
 // Create context with proper type and default value
 export const AppContext = createContext<TodoContextType>({
     todos: [],
-    completed: [],
     setTodos: () => { },
     addTodo: () => { },
     checkTodo: () => { },
@@ -40,7 +38,6 @@ interface AppProviderProps {
 
 export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [todos, setTodos] = useState<Todo[]>([]);
-    const [completed, setCompleted] = useState<string[]>([]);
 
     const addTodo = (todo: string) => {  // Moved outside useEffect
         axios.post(`${baseURL}add-todo`, {
@@ -59,11 +56,9 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         try {
             const response = await axios.delete(`${baseURL}delete-todo-completed/`);
             if (response.data.success) {
-                // console.log(response.data);
-                const deletedIds = response.data.deletedIds;
-                setCompleted(deletedIds);
+                console.log(response.data);
                 // Update the specific todo in the current state
-                // setTodos(prevTodos => prevTodos.filter(todo => todo.done == false));
+                setTodos(prevTodos => prevTodos.filter(todo => todo.done == false));
             } else {
                 console.error(response.data.message);
             }
@@ -128,7 +123,7 @@ export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => 
         fetchTodos();
     }, []);
     return (
-        <AppContext.Provider value={{ todos, completed, setTodos, addTodo, checkTodo, deleteTodo, clearCompleted }}>
+        <AppContext.Provider value={{ todos, setTodos, addTodo, checkTodo, deleteTodo, clearCompleted }}>
             {children}
         </AppContext.Provider>
     );

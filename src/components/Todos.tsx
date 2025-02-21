@@ -11,12 +11,10 @@ const Todos = () => {
     const themeContext = useContext(ThemeContext);
     const appContext = useContext(AppContext);
     const { elementColor, darkgrayishblue, lightgrayishblue } = themeContext;
-    const { todos, checkTodo, deleteTodo } = appContext;
+    const { todos, checkTodo, deleteTodo, clearCompleted } = appContext;
     const [hoveredId, setHoveredId] = useState<number | null>(null);
     const [undone, setUndone] = useState(0);
     const [filterd, setFilterd] = useState<Todo[]>([]);
-
-
     const ondeleteTranition: React.CSSProperties = {
         left: " -100%",
         transition: "left 0.5s ease-in-out"
@@ -46,7 +44,6 @@ const Todos = () => {
                     <div className='todo border-b-[0.01px] border-b-light-grayish-blue 
                     transition duration-150 ease-in-out hover:scale-100
                   relative  left-0  hover:shadow-lg
-
                   '
                         style={deleteActionId === item._id ? ondeleteTranition : {}}
 
@@ -96,7 +93,7 @@ const Todos = () => {
                     <button className=' cursor-pointer hover:text-Bright-Blue focus:text-Bright-Blue ' onClick={() => setFilterd(todos.filter(todo => !todo.done))}>Active</button>
                     <button className=' cursor-pointer hover:text-Bright-Blue focus:text-Bright-Blue ' onClick={() => setFilterd(todos.filter(todo => todo.done))}>Completed</button>
                 </div>
-                <p className='cursor-pointer'> Clear Completed</p>
+                <p className='cursor-pointer' onClick={() => clearCompleted()}> Clear Completed</p>
             </div>
         </div >
     );
