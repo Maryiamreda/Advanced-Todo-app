@@ -1,12 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import Todo from './model.js';
+import Todo from '../src/model.js';
 import cors from 'cors'   // correct
 
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:5173'  // Replace with your frontend URL
-}));
+app.use(cors({ origin: "https://advanced-todo-url.vercel.app" }));
+
 // Add middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -127,3 +126,6 @@ app.delete('/delete-todo-completed', async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 });
+
+// Export for Vercel
+export default createServerlessFunction(app);
