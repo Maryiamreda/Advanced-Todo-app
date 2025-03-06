@@ -22,7 +22,7 @@
     "noUncheckedIndexedAccess": true
   },
   "include": [
-    "src",
+    "Frontend/src",
     "api/server.js"
   ]
 }
