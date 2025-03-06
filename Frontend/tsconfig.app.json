@@ -23,6 +23,7 @@
   },
   "include": [
     "Frontend/src",
-    "api/server.js"
+    "api/server.js",
+    "environment.d.ts"
   ]
 }

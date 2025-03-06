@@ -19,8 +19,8 @@ interface TodoContextType {
 
 
 }
-const baseURL = "http://localhost:3000/";
-
+const baseURL = import.meta.env.VITE_BACKEND_URL as string;
+console.log(baseURL)
 // Create context with proper type and default value
 export const AppContext = createContext<TodoContextType>({
     todos: [],
@@ -39,7 +39,15 @@ interface AppProviderProps {
 export const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [todos, setTodos] = useState<Todo[]>([]);
 
+
+
+
     const addTodo = (todo: string) => {  // Moved outside useEffect
+        const url = `${baseURL}add-todo`;
+        console.log("Sending POST request to:", url); // Log the UR
+
+
+
         axios.post(`${baseURL}add-todo`, {
             todo: todo
         })

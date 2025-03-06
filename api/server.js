@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import Todo from '../src/model.js';
+import Todo from './model.js';
 import cors from 'cors'   // correct
 
 const app = express();
@@ -8,7 +8,6 @@ app.use(cors({ origin: "http://localhost:5173" }));
 
 // Add middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const dbURL = 'mongodb+srv://useraccess:7878788788@cluster0.r9zdppo.mongodb.net/todolist?retryWrites=true&w=majority';
 
