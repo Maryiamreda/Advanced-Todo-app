@@ -4,8 +4,10 @@ import Todo from './model.js';
 import cors from 'cors'   // correct
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173" }));
-
+app.use(cors({
+    origin: "https://advanced-todo-app-vh5l.vercel.app",
+    credentials: true
+}));
 // Add middleware
 app.use(express.json());
 
